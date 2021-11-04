@@ -9,7 +9,7 @@ class Character extends React.Component {
                 <div className="col-4 shadow p-3 mb-5 bg-white rounded">
                     <p>{this.props.name} {this.props.title}</p>
                     <img src={this.props.image} alt="wtf" height="250px" width="250px"/>
-                    <button onClick={this.props.favoriteClick}></button>
+                    <button onClick={()=>this.props.favoriteClick(this.props.character)}></button>
                 </div>
             </div>
 		)

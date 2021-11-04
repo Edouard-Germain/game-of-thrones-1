@@ -18,23 +18,32 @@ class App extends React.Component {
       .then(result=>{
         this.setState({ characters: result })
       })
-  
-  handleFavoriteClick = (character) => {
-        const newArray = this.state.favorites
-        this.setState(favorite : [newArray,...character])
-      }
+ 
+  }
+
+   
+  handleFavoriteClick = (newObject) => {
+    const newArray = this.state.favorites
+    this.setState({favorite : [newArray,...newObject]})
   }
 	render() {
     
     
     console.log(this.state)
+    console.log(this.state.favorites)
+    // console.log(character)
 		return(
       <div className="container">
         <div className="Row">
             <h1>Game of thrones</h1>
             <div className="col">
               {this.state.characters.map(character => (
-                <Character  title={character.title} name={character.fullName} image={character.imageUrl} favoriteClick={this.handleFavoriteClick}/> //passer le .fullName de l'élement courant//
+                <Character  
+                 title={character.title}
+                 name={character.fullName}
+                  image={character.imageUrl}
+                  character={character}
+                  favoriteClick={this.handleFavoriteClick}/> //passer le .fullName de l'élement courant//
               ))}
             </div>
         </div>
