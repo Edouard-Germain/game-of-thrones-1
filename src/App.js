@@ -1,25 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import Character from './components/Character'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  constructor (){
+    super()
+    this.state ={
+      characters:[],
+      favorites:[]
+    }
+  }
+  componentDidMount(){
+    fetch("https://thronesapi.com/api/v2/Characters")
+      .then(response=>response.json())
+      .then(result=>{
+        this.setState({ characters: result })
+      })
+  
+  handleFavoriteClick = (character) => {
+        const newArray = this.state.favorites
+        this.setState(favorite : [newArray,...character])
+      }
+  }
+	render() {
+    
+    
+    console.log(this.state)
+		return(
+      <div className="container">
+        <div className="Row">
+            <h1>Game of thrones</h1>
+            <div className="col">
+              {this.state.characters.map(character => (
+                <Character  title={character.title} name={character.fullName} image={character.imageUrl} favoriteClick={this.handleFavoriteClick}/> //passer le .fullName de l'élement courant//
+              ))}
+            </div>
+        </div>
+      </div>
+		)
+	}
 }
 
-export default App;
+export default App
